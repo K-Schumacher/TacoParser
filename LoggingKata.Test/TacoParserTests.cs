@@ -28,6 +28,7 @@ namespace LoggingKata.Test
             // TODO: Complete - "line" represents input data we will Parse to
             //       extract the Longitude.  Your .csv file will have many of these lines,
             //       each representing a TacoBell location
+            
 
             //Arrange
             var tester = new TacoParser();
@@ -35,7 +36,7 @@ namespace LoggingKata.Test
             var actual = tester.Parse(line);
              
             //Assert
-            Assert.NotNull(actual);
+            Assert.Equal(expected, actual.Location.Longitude);
         }
 
 
@@ -48,7 +49,18 @@ namespace LoggingKata.Test
 
             var actual = tester.Parse(line);
 
-            Assert.NotNull(actual);
+            Assert.Equal(expected, actual.Location.Latitude);
+        }
+
+        [Theory]
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", " Taco Bell Acwort...")]
+        public void GetName(string line, string expected)
+        {
+            var tester = new TacoParser();
+
+            var actual = tester.Parse(line);
+
+            Assert.Equal(expected, actual.Name);
         }
     }
 }
